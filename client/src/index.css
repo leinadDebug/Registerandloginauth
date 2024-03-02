@@ -1,0 +1,19 @@
+/* #root{
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+} */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animation-delay-2000 {
+    animation-delay: 4.5s;
+  }
+  .animation-delay-4000 {
+    animation-delay: 6s;
+  }
+  .animation-delay-3000 {
+    animation-delay: 4s;
+  }
+}
