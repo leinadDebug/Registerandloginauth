@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineSwapRight } from "react-icons/ai";
 // import Alert from "react-bootstrap/Alert";
 import Login from "../Login/login";
+import axios from "axios";
 
 export default function register() {
   const [data, setdata] = useState([
@@ -14,6 +15,7 @@ export default function register() {
       password: "",
     },
   ]);
+
   const [redflag, setRedflag] = useState(false);
   const [login, setLogin] = useState(true);
 
@@ -22,19 +24,35 @@ export default function register() {
 
     // Authenticaton in form
 
-    if (!username || !email || !password) {
+    if (!data.username || !data.email || !data.password) {
       setRedflag(true);
       alert("all fields are expected to be filled");
     } else {
       setRedflag(false);
-
       // store variable in laocalstorage
-      localStorage.setItem("username", JSON.stringify(username));
-      localStorage.setItem("email", JSON.stringify(email));
-      localStorage.setItem("password", JSON.stringify(password));
+      localStorage.setItem("username", JSON.stringify(data.username));
+      localStorage.setItem("email", JSON.stringify(data.email));
+      localStorage.setItem("password", JSON.stringify(data.password));
 
       console.log("saved in localStorage");
 
+      async function postdata() {
+
+     
+        try {
+          const res = await axios.post("http://localhost:8000/api/register", {
+            headers: { accept: "application/json" },
+            body: JSON.stringify(data),
+          });
+
+          const dataRes = await res.json;
+          console.log(dataRes);
+        } catch (err) {
+          console.log(err);
+        }
+      
+    }
+      postdata();
       setLogin(!login);
     }
   };
@@ -65,10 +83,10 @@ export default function register() {
                     type="email"
                     name="email"
                     placeholder="name.email.com"
-                    value={data.name}
+                    value={data.email}
                     className="px-4 py-2 my-1 rounded-full placeholder:text-[#767575] border-2 border-[#767575] hover:bg-slate-50"
                     onChange={(e) =>
-                      setdata({ ...data, username: e.target.value })
+                      setdata({ ...data, email: e.target.value })
                     }
                   ></input>
                 </section>
@@ -79,8 +97,11 @@ export default function register() {
                     type="text"
                     name="username"
                     placeholder="username"
+                    value={data.username}
                     className="px-4 py-2 my-1 rounded-full placeholder:text-[#767575] border-2 border-[#767575] hover:bg-slate-50"
-                    onChange={(e) => setdata({ ...data, email: e.target })}
+                    onChange={(e) =>
+                      setdata({ ...data, username: e.target.value })
+                    }
                   ></input>
                 </section>
                 <section className="flex flex-col m-3">

@@ -31,8 +31,8 @@ export function Logo() {
           y2="68.4182"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E30B0B" />
-          <stop offset="1" stop-color="#372222" stop-opacity="0" />
+          <stop stopColor="#E30B0B" />
+          <stop offset="1" stopColor="#372222" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_523049_46"
@@ -42,8 +42,8 @@ export function Logo() {
           y2="68.4182"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#00BDE7" />
-          <stop offset="1" stop-color="#C8E4EB" stop-opacity="0" />
+          <stop stopColor="#00BDE7" />
+          <stop offset="1" stopColor="#C8E4EB" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint2_linear_523049_46"
@@ -53,8 +53,8 @@ export function Logo() {
           y2="68.4182"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="white" />
-          <stop offset="1" stop-color="#FFFCF8" stop-opacity="0" />
+          <stop stopColor="white" />
+          <stop offset="1" stopColor="#FFFCF8" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint3_linear_523049_46"
@@ -64,9 +64,9 @@ export function Logo() {
           y2="43.4996"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFFCF8" />
-          <stop offset="0.797468" stop-color="white" stop-opacity="0" />
-          <stop offset="1" stop-color="white" stop-opacity="0.01" />
+          <stop stopColor="#FFFCF8" />
+          <stop offset="0.797468" stopColor="white" stopOpacity="0" />
+          <stop offset="1" stopColor="white" stopOpacity="0.01" />
         </linearGradient>
       </defs>
     </svg>
@@ -82,4 +82,3 @@ export function BgAnimation() {
     </div>
   );
 }
-

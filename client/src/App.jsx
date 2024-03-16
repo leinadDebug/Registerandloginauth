@@ -13,7 +13,7 @@ function App() {
   //create a router
   const router = createBrowserRouter([
     {
-      path: "/",
+      path: "/dashboard",
       element: <Dashboard />,
     },
     {
@@ -21,7 +21,7 @@ function App() {
       element: <Login />,
     },
     {
-      path: "/register",
+      path: "/",
       element: <Register />,
     },
   ]);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Logo } from "./loginassests/constant";
 import { Form, Link } from "react-router-dom";
 import animImg from "./loginassests/img_4207.gif";
@@ -8,8 +8,36 @@ import { BgAnimation } from "./loginassests/constant";
 import { AiOutlineSwapRight } from "react-icons/ai";
 import { TbPointFilled } from "react-icons/tb";
 import { FaRegCircleUser } from "react-icons/fa6";
+import axios from "axios";
 
 export default function Login() {
+  const [data, setdata] = useState([
+    {
+      username: "",
+      password: "",
+    },
+  ]);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+
+    let user = localStorage.getItem("username").replace(/"/g, "");
+    let pass = localStorage.getItem("password").replace(/"/g, "");
+
+    
+
+    if (data.username == null && data.password == null) {
+      alert("Fill all required fields");
+    } else if (data.username !== user) {
+      alert("Please enter the correct Username");
+    } else if (data.password !== pass) {
+      alert("password is incorrect");
+    } else {
+      alert("login is successful");
+      console.log(user + " must be qual to " + data.username);
+      console.log(pass + " must be qual to " + data.password);
+    }
+  };
   return (
     <div className="flex place-content-center h-screen p-3 bg-[#e5e5e5e9] ">
       <div className="container md:flex md:p-10 md:my-auto bg-white rounded-lg shadow-md">
@@ -26,12 +54,16 @@ export default function Login() {
               If you already have an account log in
             </p>
             <section className="flex flex-col mt-10 m-3">
-              <label>E-mail</label>
+              <label>Username</label>
               <div></div>
               <input
-                type="email"
-                name="email"
-                placeholder="name.email.com"
+                type="text"
+                name="username"
+                placeholder="username"
+                value={data.username}
+                onChange={(e) => {
+                  setdata({ ...data, username: e.target.value });
+                }}
                 className="px-4 py-2 my-2 rounded-full placeholder:text-[#767575] border-2 border-[#767575] hover:bg-slate-50"
               ></input>
             </section>
@@ -41,10 +73,17 @@ export default function Login() {
                 type="password"
                 name="password"
                 placeholder="password"
+                value={data.password}
+                onChange={(e) => {
+                  setdata({ ...data, password: e.target.value });
+                }}
                 className="px-4 py-2 my-2 rounded-full placeholder:text-[#767575] border-2 border-[#767575] hover:bg-slate-50"
               ></input>
             </section>
-            <button className=" bg-[#FF7F41] text-white mt-10 px-4 p-2 rounded ">
+            <button
+              onClick={handleClick}
+              className=" bg-[#FF7F41] text-white mt-10 px-4 p-2 rounded "
+            >
               Login
             </button>
           </form>
@@ -85,7 +124,7 @@ export default function Login() {
               <p className="text-black italic font-abel_regular ">
                 Don't have an account?
               </p>
-              <Link to={"/register"}>
+              <Link to={"/"}>
                 <button className="hover:bg-orange-400  hover:text-[white] backdrop-blur-sm bg-white text-[#FF7F41] rounded-lg inline-flex justify-center align-middle gap-2 px-3 py-2 ">
                   Sign Up
                   <AiOutlineSwapRight />
