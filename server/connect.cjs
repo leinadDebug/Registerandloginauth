@@ -1,20 +1,16 @@
-const { MongoClient } = require("mongodb");
-require("dotenv").config({ path: './config.env' });
+const mongoose = require("mongoose");
+require("dotenv").config({ path: "./config.env" });
 
 async function main() {
-  // Create a new Mongo client
-  const Db = process.env.ATLAS_URI;
-
-  // this will create a new client using our username and password to get us logged in
-  const client = new MongoClient(Db);
-
-  // this will create the connection
   try {
-    await client.connect();;
+    // Connect to MongoDB using Mongoose
+    await mongoose.connect(process.env.ATLAS_URI, {
+      serverSelectionTimeoutMS: 5000, // Example of setting server selection timeout
+    });
 
-    console.log("Connected successfully to server");
-  } catch (e) {
-    console.error(e);
+    console.log("Connected successfully to MongoDB");
+  } catch (error) {
+    console.error("Error connecting to MongoDB:", error);
   }
 }
 
