@@ -3,11 +3,12 @@ import { BgAnimation, Logo } from "../Login/loginassests/constant";
 import { TbPointFilled } from "react-icons/tb";
 import { Link } from "react-router-dom";
 import { AiOutlineSwapRight } from "react-icons/ai";
-// import Alert from "react-bootstrap/Alert";
+import { useNavigate } from "react-router-dom";
 import Login from "../Login/login";
 import axios from "axios";
 
 export default function register() {
+  const Navigate = useNavigate();
   const [data, setdata] = useState([
     {
       username: "",
@@ -19,9 +20,29 @@ export default function register() {
   const [redflag, setRedflag] = useState(false);
   const [login, setLogin] = useState(true);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const { username, email, password } = data;
+    try {
+      const { data } = await axios.post(
+        "http://localhost:8000/api/auth/register",
+        {
+          username,
+          email,
+          password,
+        }
+      );
+      if (data.message == "User registered successfully") {
+        console.log("registered successfully");
+        setdata("");
+        Navigate("/dashboard");
+      } else {
+        alert(data.message);
+      }
+    } catch (e) {
+      console.log(e);
+    }
     // Authenticaton in form
 
     if (!data.username || !data.email || !data.password) {
@@ -36,23 +57,6 @@ export default function register() {
 
       console.log("saved in localStorage");
 
-      async function postdata() {
-
-     
-        try {
-          const res = await axios.post("http://localhost:8000/api/register", {
-            headers: { accept: "application/json" },
-            body: JSON.stringify(data),
-          });
-
-          const dataRes = await res.json;
-          console.log(dataRes);
-        } catch (err) {
-          console.log(err);
-        }
-      
-    }
-      postdata();
       setLogin(!login);
     }
   };
