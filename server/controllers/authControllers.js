@@ -1,5 +1,5 @@
 const express = require("express");
-const User = require('../model/user.model');
+const User = require("../model/user.model");
 
 const registerUser = async (req, res) => {
   const { email, username, password } = req.body;
